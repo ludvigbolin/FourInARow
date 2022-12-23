@@ -63,6 +63,10 @@ public class CalcBoard {
         boolean dia1 = (getDiagonalDownValue(node, bg)) >= valueIfFIR;
         boolean dia2 = (getDiagonalUpValue(node, bg)) >= valueIfFIR;
 
+        System.out.println("Is four in a row?");
+        System.out.println(hor);
+        System.out.println("score: " + getHorizontalValue(node, bg));
+        System.out.println(hor || ver || dia1 || dia2);
         return hor || ver || dia1 || dia2;
     }
 
@@ -84,26 +88,42 @@ public class CalcBoard {
 
         int tempPoints = 1;
         int canMakeFourInARow = 4; // 0 = correct
+        boolean isFirstCorrectNodeRed = false;
         for (int i = 0; i < 7; i++) {
-            // System.out.println(xCoordStart + i + ":" + yCoordStart);
-            // System.out.println("tempPoints: " + tempPoints);
-            // System.out.println("points: " + points);
-            // System.out.println("canMake4: " + canMakeFourInARow);
+            System.out.println("main node: " + xCoordStart + ":" + yCoordStart);
+            System.out.println(xCoordStart + i + ":" + yCoordStart);
+            System.out.println("tempPoints: " + tempPoints);
+            System.out.println("points: " + points);
+            System.out.println("canMake4: " + canMakeFourInARow);
+
+
 
             Node currNode = new Node(xCoordStart + i, yCoordStart);
 
             if (map.get(currNode) == null) {
+
                 // Vägg
                 // System.out.println("vägg");
                 if (tempPoints > points && canMakeFourInARow <= 0)
                     points = tempPoints;
 
             } else if (map.get(currNode).getBackground().equals(bg)) {
+
+                if (canMakeFourInARow == 4) {
+                    isFirstCorrectNodeRed = true;
+                }
+
                 // rätt char
                 // System.out.println("rätt char");
                 tempPoints++;
                 canMakeFourInARow--;
+
+                if (canMakeFourInARow < 0 && isFirstCorrectNodeRed) {
+                    tempPoints--;
+                }
+
             } else if (!map.get(currNode).getBackground().equals(whiteBG)) {
+
                 // fel char
                 // System.out.println("fel char");
                 if (tempPoints > points && canMakeFourInARow <= 0)
@@ -113,8 +133,11 @@ public class CalcBoard {
                 canMakeFourInARow = 4;
 
             } else {
+                if (canMakeFourInARow == 4) {
+                    isFirstCorrectNodeRed = false;
+                }
+
                 // tomrum
-                // System.out.println("tomrum");
                 canMakeFourInARow--;
             }
 
@@ -151,14 +174,15 @@ public class CalcBoard {
 
         int tempPoints = 1;
         int canMakeFourInARow = 4; // 0 = correct
+        boolean isFirstCorrectNodeRed = false;
         for (int i = 0; i < 7; i++) {
             // System.out.println(xCoordStart + i + ":" + yCoordStart);
-            System.out.println("tempPoints: " + tempPoints);
-            System.out.println("points: " + points);
+            // System.out.println("tempPoints: " + tempPoints);
+            // System.out.println("points: " + points);
             // System.out.println("canMake4: " + canMakeFourInARow);
 
             Node currNode = new Node(xCoordStart, yCoordStart + i);
-            System.out.println("currNode is " + currNode.x + ":" + currNode.y);
+            // System.out.println("currNode is " + currNode.x + ":" + currNode.y);
 
             if (map.get(currNode) == null) {
                 // Vägg
@@ -167,11 +191,20 @@ public class CalcBoard {
                     points = tempPoints;
 
             } else if (map.get(currNode).getBackground().equals(bg)) {
+                if (canMakeFourInARow == 4) {
+                    isFirstCorrectNodeRed = true;
+                }
+
                 // rätt char
-                System.out.println("inne i rätt");
+                // System.out.println("inne i rätt");
 
                 tempPoints++;
                 canMakeFourInARow--;
+
+                if (canMakeFourInARow < 0 && isFirstCorrectNodeRed) {
+                    tempPoints--;
+                }
+
             } else if (!map.get(currNode).getBackground().equals(whiteBG)) {
                 // fel char
 
@@ -183,6 +216,9 @@ public class CalcBoard {
 
             } else {
                 // tomrum
+                if (canMakeFourInARow == 4) {
+                    isFirstCorrectNodeRed = false;
+                }
 
                 canMakeFourInARow--;
             }
@@ -190,7 +226,7 @@ public class CalcBoard {
             if (tempPoints > points && canMakeFourInARow <= 0) {
                 points = tempPoints;
                 //tempPoints = 1;
-                System.out.println("Inne i justera points");
+                // System.out.println("Inne i justera points");
             }
 
         }
@@ -211,6 +247,7 @@ public class CalcBoard {
 
         int tempPoints = 1;
         int canMakeFourInARow = 4; // 0 = correct
+        boolean isFirstCorrectNodeRed = false;
         for (int i = 0; i < 7; i++) {
             // System.out.println(xCoordStart + i + ":" + yCoordStart);
             // System.out.println("tempPoints: " + tempPoints);
@@ -227,9 +264,15 @@ public class CalcBoard {
 
             } else if (map.get(currNode).getBackground().equals(bg)) {
                 // rätt char
+                if (canMakeFourInARow == 4) {
+                    isFirstCorrectNodeRed = true;
+                }
 
                 tempPoints++;
                 canMakeFourInARow--;
+                if (canMakeFourInARow < 0 && isFirstCorrectNodeRed) {
+                    tempPoints--;
+                }
             } else if (!map.get(currNode).getBackground().equals(whiteBG)) {
                 // fel char
 
@@ -241,6 +284,9 @@ public class CalcBoard {
 
             } else {
                 // tomrum
+                if (canMakeFourInARow == 4) {
+                    isFirstCorrectNodeRed = false;
+                }
 
                 canMakeFourInARow--;
             }
@@ -268,6 +314,7 @@ public class CalcBoard {
 
         int tempPoints = 1;
         int canMakeFourInARow = 4; // 0 = correct
+        boolean isFirstCorrectNodeRed = false;
         for (int i = 0; i < 7; i++) {
             // System.out.println(xCoordStart + i + ":" + yCoordStart);
             // System.out.println("tempPoints: " + tempPoints);
@@ -284,9 +331,16 @@ public class CalcBoard {
 
             } else if (map.get(currNode).getBackground().equals(bg)) {
                 // rätt char
+                if (canMakeFourInARow == 4) {
+                    isFirstCorrectNodeRed = true;
+                }
 
                 tempPoints++;
                 canMakeFourInARow--;
+
+                if (canMakeFourInARow < 0 && isFirstCorrectNodeRed) {
+                    tempPoints--;
+                }
             } else if (!map.get(currNode).getBackground().equals(whiteBG)) {
                 // fel char
 
@@ -298,6 +352,9 @@ public class CalcBoard {
 
             } else {
                 // tomrum
+                if (canMakeFourInARow == 4) {
+                    isFirstCorrectNodeRed = false;
+                }
 
                 canMakeFourInARow--;
             }
