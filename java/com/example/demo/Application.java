@@ -1,6 +1,5 @@
 package com.example.demo;
 
-import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -16,7 +15,7 @@ import java.io.IOException;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class HelloApplication extends Application {
+public class Application extends javafx.application.Application {
     private Board b;
     private String winningText;
     private boolean inTesting = false;
